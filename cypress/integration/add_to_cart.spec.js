@@ -9,8 +9,17 @@ describe('example to-do app', () => {
     // we include it in our beforeEach function so that it runs before each test
     cy.visit('http://localhost:3000/')
   })
-  it("click on product on the page", () => {
-    cy.get(".product").first().click()
-    cy.url().should('include', '/products/2')
+  it("There is products on the page", () => {
+    cy.get(".products article").should("be.visible");
+  });
+  it("There is 2 products on the page", () => {
+    cy.get(".products article").should("have.length", 2);
+  });
+
+  it("cart should be zero", () => {
+    cy.contains("My Cart (0)")
+    cy.get('.btn').first().click({force: true})
+    cy.contains('My Cart (1)')
+    
   });
 })
